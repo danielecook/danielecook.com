@@ -1,6 +1,7 @@
 {{ define "main" }}
 
 <main class="center mv4 content-width ph3">
+  {{ .Scratch.Set "title" (.Title | upper)  }}
   <h1 class="f2 fw6 silver" id="tag">{{ .Title | upper }}</h1>
   {{ .Content }}
   <ul class="list pa0">
@@ -10,6 +11,7 @@
   </ul>
 </main>
 
+{{ partialCached "tag_cloud.html" . .Title }}
 <div class="pagination tc db fixed-l bottom-2-l right-2-l mb3 mb0-l">
 {{ partial "back-to-top.html" . }}
 </div>

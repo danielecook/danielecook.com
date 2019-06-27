@@ -17,11 +17,11 @@ __[Download the latest release of Seq-Utilities][1]__
 
 **Generate a random dna sequence 200 base pairs long.**
 
-![dna1](/dna1-1024x337.png)
+![dna1](/dna1.png)
 
 **Generate the complement, reverse complement, RNA, and protein of a DNA sequence**
 
-![](/dna2-1024x521.png)
+![](/dna2.png)
 
 **Open up blast and pre-populate the search field**
 

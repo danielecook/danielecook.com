@@ -4,7 +4,6 @@ author: Daniel Cook
 layout: post
 aliases:
   - /tips-for-working-with-data/
-published: true
 date: 2019-05-12
 comments: true
 tags:

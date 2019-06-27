@@ -27,7 +27,7 @@ You can use the `&` operator to concatenate two keywords (`gene & " " & disease`
 
 The result would look something like this:
 
-[<img src="/Screen-Shot-2014-03-03-at-8.38.03-AM-1024x351.png" alt="Pubmed result counts are in Column A1." />][2]
+[<img src="/Screen-Shot-2014-03-03-at-8.38.03-AM.png" alt="Pubmed result counts are in Column A1." />][2]
 
 <small>Pubmed result counts are in Column A</small>
 

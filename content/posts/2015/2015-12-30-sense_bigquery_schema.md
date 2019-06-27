@@ -15,7 +15,7 @@ BigQuery now offers a [schema auto-detection features](https://cloud.google.com/
 
 ## Original Post
 
-[Bigquery]() is a phenomenal tool for analyzing large datasets. It enables you to upload large datasets and perform sophisticated SQL queries on millions of rows in seconds. Moreover, it can be integrated with R using [Bigrquery](), which can be used to interact with bigquery using some of the functions in dplyr. 
+[BigQuery](https://cloud.google.com/bigquery/) is a phenomenal tool for analyzing large datasets. It enables you to upload large datasets and perform sophisticated SQL queries on millions of rows in seconds. Moreover, it can be integrated with R using [BigRQuery](https://github.com/r-dbi/bigrquery), which can be used to interact with bigquery using some of the functions in dplyr. 
 
 It is easy to upload datasets to bigquery, although it requires you to specify a schema. If you have a lot of columns in a dataset this can be a pain to do manually - so I wrote a script to automate the process. The script automatically determines the variable types within the first 500 rows of a tab-delimited dataset. To get started, download the python script below and save it as schema.py.
 

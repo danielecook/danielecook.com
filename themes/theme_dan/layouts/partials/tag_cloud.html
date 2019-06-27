@@ -1,9 +1,14 @@
+{{ $title := .Scratch.Get "title" }}
 {{ $maxtags := .Site.Params.maxTags | default 50 }}
 {{ if .Site.Params.showTagCloud | default true }}
 <div class="dn tr fixed right-2 " id="tag-cloud">
     <strong>tags</strong> <br>
     {{ range first $maxtags .Site.Taxonomies.tags.ByCount }}
-    <a class="silver no-underline tag" href="{{ "/tags/" | relLangURL }}{{ .Name | urlize }}">{{ .Name }}</a> ({{ .Count }}) <br/></li>
+    {{ if eq $title (.Name | upper) }}
+    <a class="silver selected tag" href="{{ "/tags/" | relLangURL }}{{ .Name | urlize }}">{{ .Name }}</a> ({{ .Count }}) <br/></li>
+    {{ else }}
+    <a class="silver tag" href="{{ "/tags/" | relLangURL }}{{ .Name | urlize }}">{{ .Name }}</a> ({{ .Count }}) <br/></li>
+    {{ end }}
   {{ end }}
   <br />
   {{ if .IsHome }}

@@ -11,7 +11,6 @@ tags:
   - R
 ---
 
-
 <div class="fl w-100 pa2">
 <div class="fl w-50 ma2 thumbnail">
     <img src="/Screen-Shot-2014-05-27-at-10.50.04-PM.png" />
@@ -23,9 +22,6 @@ tags:
     <small>Running and Biking in Chicago</small>
 </div>
 </div>
-
-
-* * *
 
 If you use [runkeeper][1] and pay for a yearly subscription (runkeeper elite), you can export your data and plot all of your activities simultaneously using [**R**][2]. I&#8217;ve written a script for doing so (Special thanks to [flowing data][3] which has a tutorial that helped with a few key parts of this).
 

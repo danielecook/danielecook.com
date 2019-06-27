@@ -15,7 +15,7 @@ If you use **python**, it is easy to download and store data in an SQlite databa
 
 Below you will see that is what I have done here for HapMap allele frequency data ([2010-08_phaseII+III][1]), and it allows me to retrieve allele frequency data from 26,278,275 rows across 11 populations instantly. The database itself is 3.22 Gb. A zipped version (~1Gb) is available [Here][2].
 
-[<img src="/Screen-Shot-2014-01-20-at-12.07.25-AM-1024x466.png" />][3]
+[<img src="/Screen-Shot-2014-01-20-at-12.07.25-AM.png" />][3]
 
 You will need sqlalchemy for this script to work. Install using `pip install sqlalchemy`.
 

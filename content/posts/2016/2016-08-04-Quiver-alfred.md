@@ -3,7 +3,7 @@ title: Quiver-alfred
 author: Daniel Cook
 layout: post
 aliases:
-  -  /Quiver-alfred/
+  -  /quiver-alfred
 date: 2016-08-04
 tags:
   - Alfred

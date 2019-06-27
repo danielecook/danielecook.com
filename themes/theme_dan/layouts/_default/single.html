@@ -12,17 +12,8 @@
   {{ end }}
   <div class="lh-copy post-content">{{ .Content }}</div>
   {{ if ne .Params.show_comments false }}
-  <div class='comments'>
-
-    <br />
-    <script src="https://utteranc.es/client.js"
-        repo="danielecook/danielecook.github.io"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-    </script>
-{{ end }}
+        <div id='comments'></div>
+  {{ end }}
 </main>
 {{ if not (eq .Params.toc false) }}
   {{ partial "table-of-contents" . }}
