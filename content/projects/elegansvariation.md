@@ -11,4 +11,5 @@ The site features a genome-browser, a catalog for ordering scientific specimens,
 
 I developed this resource during graduate school.
 
+* __[Github](https://www.github.com/andersenlab/CeNDR)__
 * __[CeNDR (elegansvariation.org)](https://www.elegansvariation.org)__
