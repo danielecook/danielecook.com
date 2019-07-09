@@ -11,4 +11,4 @@ draft: false
 That is why I created __Hacker News Trending (HN Trending)__. HN Trending is a simple website that aggregates Hacker news stories by popularity over the past week, month, year, and over all time. HN Trending is updated every Sunday.
 
 * __[Hacker News Trending](https://www.hntrending.com)__
-* __[Front page Hacker News Story](https://hntrending.com/domains/year/index.html)__
+* __[Front page Hacker News Story](https://news.ycombinator.com/item?id=18632719)__

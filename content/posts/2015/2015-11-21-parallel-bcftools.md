@@ -5,6 +5,8 @@ layout: post
 aliases:
   -  /parallelize-bcftools/
 date: 2015-11-21
+tags:
+  - VCF
 ---
 
 [bcftools](http://samtools.github.io/bcftools/) is a great for working with [variant call files](http://www.1000genomes.org/wiki/analysis/variant%20call%20format/vcf-variant-call-format-version-41). In general, it is fast. However, I have found that the process of merging VCF files (using `bcftools merge`) and performing concordance checking (using `bcftools gtcheck`) can be a little bit slow. That is why I wrote two functions that take advantage of [GNU Parallel](http://www.gnu.org/software/parallel/) to parallelize them. 
