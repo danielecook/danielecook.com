@@ -18,7 +18,16 @@ For more information about me, please take a look at the following links:
 * [RSS Feed for this website](/feed/index.xml)
 * [Photos](/photos)
 
+## Contact
+
 You can email me at [danielecook@gmail.com](mailto:danielecook@gmail.com), or use the [contact](/contact) form.
+
+## Elsewhere on the internet...
+
+* [Rosalind.info profile](http://rosalind.info/users/danielecook/) - Rosalind is an excellent problem-based learning website for bioinformatics
+* [Kaggle](https://www.kaggle.com/danielecook)
+
+![Project Euler profile](https://projecteuler.net/profile/danielecook.png)
 
 ## Two truths and a lie
 
