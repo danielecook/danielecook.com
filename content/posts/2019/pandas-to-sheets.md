@@ -14,13 +14,14 @@ Then you can set the content of any google sheets worksheet to the data from a p
 ```python
 #!/usr/bin/env python
 import gspread
+from pandas import pd
 from oauth2client.service_account import ServiceAccountCredentials
 
 def iter_pd(df):
-    for val in list(df.columns):
+    for val in df.columns:
         yield val
-    for row in df.values:
-        for val in list(row):
+    for row in df.to_numpy():
+        for val in row:
             if pd.isna(val):
                 yield ""
             else:
