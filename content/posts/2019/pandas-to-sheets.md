@@ -14,7 +14,7 @@ Then you can set the content of any google sheets worksheet to the data from a p
 ```python
 #!/usr/bin/env python
 import gspread
-from pandas import pd
+import pandas as pd
 from oauth2client.service_account import ServiceAccountCredentials
 
 def iter_pd(df):
