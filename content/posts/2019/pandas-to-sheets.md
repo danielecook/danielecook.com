@@ -7,7 +7,7 @@ tags:
   - google-sheets
 ---
 
-I wrote the following snippet to post data files to google sheets. In order to get this to work you will need to [authorize google sheets access](https://gspread.readthedocs.io/en/latest/oauth2.html).
+I wrote the following snippet to post datasets (e.g. TSVs or CSVs) to google sheets. In order to get this to work you will need to [authorize google sheets access](https://gspread.readthedocs.io/en/latest/oauth2.html).
 
 Then you can set the content of any google sheets worksheet to the data from a pandas dataframe by using the `pandas_to_sheets` function.
 
@@ -32,7 +32,7 @@ def pandas_to_sheets(pandas_df, sheet, clear = True):
         sheet.clear()
     (row, col) = pandas_df.shape
     cells = sheet.range("A1:{}".format(gspread.utils.rowcol_to_a1(row + 1, col)))
-    for cell, val in zip(cells, iter_pd(df)):
+    for cell, val in zip(cells, iter_pd(pandas_df)):
         cell.value = val
     sheet.update_cells(cells)
 
