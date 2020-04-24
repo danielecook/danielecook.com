@@ -8,13 +8,20 @@
     <li class="flex flex-wrap">
         <div class='w-100 w-60-ns pa3'>
             <h2 class="f4 heading-color heading-font fw6 no-underline" >{{ .Title }}</h2>
-            <time>{{ .Date.Format "2006-01-02" }}</time>
+            {{ $t := (time "1991-01-05") }}
+            {{ if .Date  }}
+            {{ if .Date.After $t }}
+              <time>{{ .Date.Format "2006-01-02" }}</time> 
+              {{ end }}
+            {{ end }}
             {{ .Content }}
         </div>
+        {{ if .Params.image }}
         <div class='w-100 w-40-ns pa4' style='line-height: 25px;'>
             <a href="{{ .Params.project_url }}"><img src="/{{ .Params.image }}" class="float-right">
             </a>
         </div>
+        {{ end }}
     </li>
     {{ end }}
   </ul>

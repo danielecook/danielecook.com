@@ -11,9 +11,9 @@ tags:
 draft: false
 ---
 
-If you use [Nextflow](http://www.nextflow.io) on a cluster with the SLURM scheduler, than these bash functions may be useful to you and worth sticking in your `.bashrc`.
+If you use [Nextflow](http://www.nextflow.io) on a cluster with the SLURM scheduler, then these bash functions may be useful to you and worth sticking in your `.bashrc`.
 
-{{< highlight bash "hl_lines=5-6,linenos=table" >}}
+{{< highlight bash >}}
 # Shortcut for going to work directories
 # Usage: gw <workdir pattern>
 # Replace the work directory below as needed

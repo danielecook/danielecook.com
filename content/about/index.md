@@ -1,4 +1,5 @@
 ---
+title: About Me
 show_comments: false
 toc: false
 prev_next: false

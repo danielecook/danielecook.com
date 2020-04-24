@@ -2,6 +2,8 @@ baseURL: https://www.danielecook.com
 footnoteReturnLinkContents: ↩
 params:
   AuthorName: Daniel E. Cook
+  mainSections:
+    - posts
 permalinks:
   posts: /:title/
 languageCode: "en-us"
@@ -11,13 +13,6 @@ staticDir: ["static"]
 
 languageCode: "en-us"
 copyright: "This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License."
-
-# pygments
-pygmentsCodeFences: true
-pygmentsUseClasses: true
-pygmentsCodefencesGuessSyntax: true
-pygmentsOptions:
-  linenos: "table"
 
 author:
   name: "Daniel Cook"
@@ -64,3 +59,32 @@ menu:
       name: "contact"
       url: "/contact/"
       weight: 100
+
+markup:
+  goldmark:
+    extensions:
+      definitionList: true
+      footnote: true
+      linkify: true
+      strikethrough: true
+      table: true
+      taskList: true
+      typographer: true
+    parser:
+      attribute: true
+      autoHeadingID: true
+      autoHeadingIDType: github
+    renderer:
+      hardWraps: false
+      unsafe: false
+      xhtml: false
+  highlight:
+    codeFences: true
+    guessSyntax: true
+    hl_Lines: ""
+    lineNoStart: 1
+    lineNos: false
+    lineNumbersInTable: true
+    noClasses: true
+    style: monokai
+    tabWidth: 4
