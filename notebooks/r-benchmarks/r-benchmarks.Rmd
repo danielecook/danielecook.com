@@ -1,0 +1,158 @@
+---
+author: "Dan Cook"
+title: "Speeding up Reading and Writing in R"
+output: 
+  html_document: 
+    keep_md: yes
+    theme: null
+editor_options: 
+  chunk_output_type: console
+---
+
+# 
+
+```{r, echo = F, message=F, warning=F, tidy=T}
+library(tidyverse)
+library(knitr)
+
+opts_chunk$set(header = F, 
+               echo = T,
+               warning = FALSE,
+               message = FALSE,
+               print = FALSE,
+               verbose = F,
+               tidy = T,
+               cache = T,
+               cache.path = "cache/",
+               results = "asis",
+               tidy = F,
+               tidy.opts = list(width.cutoff=60))
+opts_chunk$set(fig.path="figure/", dev=c("png"))
+```
+
+```{r, include=F, cache=F}
+opts_chunk$set(cache.extra = tools::md5sum('data.tsv'))
+```
+
+If you are relying on built-in functions to read and write large datasets you are losing out  on efficiency and speed gains available through external packages in R. Below, I benchmark some of the options out there used for reading and writing files.
+
+## Sample Data
+
+First, I'll generate a sample dataset with ten million rows we can use for testing.
+
+### Generating a test dataset
+
+```{r generate_data, cache=T, tidy=F}
+library(tidyverse)
+library(microbenchmark)
+n <- 1e6
+times <- 10 # Number of times to run each benchmark
+data <- data.frame(a = runif(n),
+                   b = sample(1:1000, n, T),
+                   c = sample(month.name, n, T),
+                   d = sample(LETTERS, n, T))
+
+write.table(data, "data.tsv", quote = F, row.names = F)
+```
+
+Here are the first few rows of that dataset:
+
+`r knitr::kable(head(data, n=5), row.names=T, format = 'markdown')`
+
+## Reading TSVs
+
+Base R has some pretty slow functions for reading files that also are poorly designed (row numbers and quotes by default, issues reading column names with special characters, etc.). Lets see how they compare with more up to date packages.
+
+### vroom vs readr vs base R vs data.table
+
+Below I use microbenchmark to compare the following methods for reading this 1M row dataset in:
+
+* `base::read.table`
+* `base::read.delim`
+* `readr::read_tsv`
+* `vroom::vroom`
+* `data.table::fread`
+* `tbl_df(data.table::fread)` - This converts the data.table to a `tibble::tbl_df` object which is the type of data structure `readr` and `vroom` return and is what is used in the [tidyverse](https://www.tidyverse.org/).
+
+These functions will output data in either a data.frame, tibble, or data.table.
+
+```{r benchmarks, cache=T, fig.width=10, fig.height=5}
+bm <- microbenchmark(
+  `base::read.table` = read.table("data.tsv"),
+  `base::read.delim` = read.delim("data.tsv"),
+  `readr::read_tsv` = readr::read_tsv("data.tsv"),
+  `vroom ~ 1 thread` = vroom::vroom("data.tsv", num_threads = 1),
+  `vroom ~ 8 threads` = vroom::vroom("data.tsv"),
+  `tbl_df(data.table::fread) ~ 1 thread` = tbl_df(data.table::fread("data.tsv", nThread = 1)),
+  `tbl_df(data.table::fread) ~ 8 threads` = tbl_df(data.table::fread("data.tsv")),
+  `data.table::fread ~ 1 thread` = data.table::fread("data.tsv", nThread = 1),
+  `data.table::fread ~ 8 threads` = data.table::fread("data.tsv"),
+  times = times
+)
+autoplot(bm) + 
+  labs(caption = glue::glue("{scales::comma(n)} rows; {times} times"))
+  
+```
+
+Looks like the base R functions lose - by a lot. Stop wasting your time with `read.table`, `read.csv`, and `read.delim` and move to sometehing quicker like `data.table::fread`, or `vroom::vroom` both of which have comparable performance. Both can also take advantage of multiple cores but outperform base R even when they only use a single thread!
+
+## Writing TSVs
+
+### vroom vs readr vs data.table vs base R
+
+Next lets compare methods for writing TSV files. Again, base R has the `write.csv` and `write.table` functions which have poor defaults (quoting strings, adding rownames).
+
+```{r writing_tsv, fig.width=10, fig.height=5}
+bm <- microbenchmark(
+    `base::write.table` = write.table(data, file = "out.tsv", quote=F, sep = "\t"),
+    `readr::write_tsv` = readr::write_tsv(data, "out.tsv"),
+    `readr::write_tsv + gz` = readr::write_tsv(data, "out.tsv.gz"),
+    `data.table::fwrite ~ 1 thread` = data.table::fwrite(data, "out.tsv", nThread = 1),
+    `data.table::fwrite ~ 8 threads` = data.table::fwrite(data, "out.tsv", nThread = 8),
+    `vroom::vroom_write ~ 1 thread` = vroom::vroom_write(data, "out.tsv", num_threads = 1),
+    `vroom::vroom_write ~ 8 threads` = vroom::vroom_write(data, "out.tsv"),
+    `vroom::vroom_write ~ 1 thread + gz` = vroom::vroom_write(data, "out.tsv.gz", num_threads = 1),
+    `vroom::vroom_write ~ 8 threads + gz` = vroom::vroom_write(data, "out.tsv.gz"),
+    times = times
+)
+autoplot(bm) 
+```
+
+Apparently, applying gzip compression slows things down considerably but can save a lot of space.
+
+### Serializing Data
+
+Serialized data formats retain column types and avoid data loss that may occur when writing and reading TSVs. Here I compare:
+
+* `feather::write_feather`
+* `fst::write_fst`
+* `base::save`
+* `base::saveRDS`
+
+Note that these serialization formats each provide other benefits that should be considered. For example, feather files are a good interchange format between R and python using the python Pandas module.
+
+```{r serialize}
+bm <- microbenchmark(
+   `base::save`=save(data, file = "out.Rda"),
+   `saveRDS` = saveRDS(data, file = "out.rds"),
+   `fst::write_fst` = fst::write_fst(data, path = "out.fst"),
+   `feather::write_feather` = feather::write_feather(data, path = "out.feather"),
+   times = times
+)
+autoplot(bm) 
+```
+
+### Reading Serialized Data
+
+```{r serialize_bm}
+bm <- microbenchmark(
+   `base::load`=load(file = "out.Rda"),
+   `readRDS` = readRDS(file = "out.rds"),
+   `fst::read_fst` = fst::read_fst(path = "out.fst"),
+   `feather::read_feather` = feather::read_feather(path = "out.feather"),
+   times = times
+)
+autoplot(bm) 
+```
+
+`fst` reads the quickest but `feather` is not too far behind.

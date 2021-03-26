@@ -9,8 +9,6 @@
 <link href='{{ $style.Permalink }}' integrity="{{ $style.Data.Integrity }}" rel="stylesheet" media="screen">
 {{- $style := resources.Get "css/styles.css" | resources.Minify }}
 <link href='{{ $style.Permalink }}' integrity="{{ $style.Data.Integrity }}" rel="stylesheet" media="screen">
-{{- $style := resources.Get "css/syntax.css" | resources.Minify }}
-<link href='{{ $style.Permalink }}' integrity="{{ $style.Data.Integrity }}" rel="stylesheet" media="screen">
 
 <!-- Icon -->
 <link rel="icon" 

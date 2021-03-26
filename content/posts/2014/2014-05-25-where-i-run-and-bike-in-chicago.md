@@ -12,7 +12,7 @@ tags:
 
 ### Original Post (2014-05-25)
 
-<img style="float:left; margin-right:20px;border: 1px solid black;" src="/2-all.png" alt="2-all" width="366" height="1024" class="alignnone size-large wp-image-502" />
+![Where I run and bike in Chicago](/2-all.png)
 
 Using [runkeeper](http://www.runkeeper.com) and with the help of a tutorial at [flowing data](http://www.flowingdata.com), I was able to plot all of the running and biking I&#8217;ve been doing in Chicago since moving here two years ago. The <span style="color:#0080ff"><strong>blue</strong></span> is running and the **black** is biking.
 

@@ -9,7 +9,7 @@ prev_next: false
 
 ## Hello World! My name is Daniel E. Cook
 
-I am currently a Senior Bioinformatician in the [Swanton Lab](https://www.crick.ac.uk/research/labs/charles-swanton) at the [Crick Institute](http://www.crick.ac.uk) in London.  This is my personal website, where I post things I have developed or useful tips/tricks I have picked up.
+I am currently an AI Resident at Google Research. This is my personal website, where I post things I have developed or useful tips/tricks I have picked up.
 
 For more information about me, please take a look at the following links:
 
